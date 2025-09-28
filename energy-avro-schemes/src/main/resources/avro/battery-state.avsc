@@ -1,0 +1,10 @@
+{ "name": "BatteryState",
+  "namespace": "energy.avro",
+  "type": "record",
+  "fields": [
+    { "name": "charging_source", "type": "string" },
+    { "name": "device_id", "type": "string" },
+    { "name": "charging", "type": "int" },
+    { "name": "current_capacity", "type": "int" }
+  ]
+}

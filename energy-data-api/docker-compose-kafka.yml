@@ -47,3 +47,13 @@ services:
       SCHEMA_REGISTRY_HOST_NAME: schema-registry
       SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
       SCHEMA_REGISTRY_LOG4J_ROOT_LOGLEVEL: WARN
+
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: device_event
+      POSTGRES_USER: pg-user
+      POSTGRES_PASSWORD: iAMs00perSecrEET
+    ports:
+      - "5432:5432"
