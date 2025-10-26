@@ -1,5 +1,7 @@
 package kafka;
 
+import energy.avro.BatteryState;
+import io.confluent.kafka.serializers.KafkaAvroDeserializer;
 import io.confluent.kafka.streams.serdes.avro.GenericAvroSerde;
 import org.apache.avro.generic.GenericData;
 import org.apache.kafka.common.serialization.Serdes;
@@ -31,9 +33,8 @@ public class KafkaStreamsConsumer {
         this.properties = props;
     }
 
-
-    public KStream<String, GenericData.Record> stream(String topic) {
-        return builder.stream(topic);
+    public StreamsBuilder getBuilder() {
+        return this.builder;
     }
 
     public KafkaStreams start() {

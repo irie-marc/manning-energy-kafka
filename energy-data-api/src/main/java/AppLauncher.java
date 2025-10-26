@@ -1,4 +1,5 @@
 import energy.avro.BatteryState;
+import energy.avro.RawDeviceEvent;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.dropwizard.core.Application;
 import io.dropwizard.core.setup.Bootstrap;
@@ -34,7 +35,7 @@ public class AppLauncher extends Application<DeviceEventApplicationConfig> {
         settings.put("schema.registry.url", "http://localhost:8090");
 
 
-        KafkaProducer<String, BatteryState> producer = new KafkaProducer<>(settings);
+        KafkaProducer<String, RawDeviceEvent> producer = new KafkaProducer<>(settings);
         Runtime.getRuntime().addShutdownHook(new Thread("shutdown-hook") {
             @Override
             public void run() {
