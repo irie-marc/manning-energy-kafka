@@ -1,0 +1,14 @@
+{ "name": "DeviceMessageMetadata",
+  "namespace": "energy.avro",
+  "type": "record",
+  "fields": [
+    { "name": "message_id", "type": "string" },
+    { "name": "device_id", "type": "string" },
+    { "name": "is_parsed", "type": "boolean" },
+    { "name": "time_stamp_arrival", "type": "long" },
+    { "name": "time_stamp_parse_start", "type": "long" },
+    { "name": "time_stamp_parse_completed", "type": ["null", "long"], "default": null},
+    { "name": "parsing_duration_nano_seconds", "type": ["null", "long"], "default": null},
+    { "name": "number_of_events", "type": "long" }
+  ]
+}

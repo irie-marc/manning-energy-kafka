@@ -12,14 +12,11 @@ import java.util.UUID;
 
 public interface BatteryStateDAO {
 
-    @SqlQuery("SELECT email FROM <table> WHERE id = :id")
-    @RegisterBeanMapper(BatteryStateDaoImpl.class)
-    public BatteryStateDaoImpl getBatteryState(@Define("table") String table, @Bind("id") String id);
+
 
     @SqlQuery("SELECT * FROM <table> WHERE device_id = :device_id")
     @RegisterBeanMapper(BatteryStateDaoImpl.class)
     public List<BatteryStateDaoImpl> getBatteryStatesByDeviceId(@Define("table") String table, @Bind("device_id") UUID deviceId);
-
 
     @SqlUpdate("INSERT INTO <table> (id, device_id, charging_source, charging, current_capacity) VALUES (:id, :device_id, :charging_source, :charging, :current_capacity)")
     void addBatteryState(@Define("table") String table,

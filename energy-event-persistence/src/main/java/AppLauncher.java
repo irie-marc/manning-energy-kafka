@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import repository.BatteryStateRepository;
 import repository.JdbiProvider;
+import repository.MetadataRepository;
 
 public class AppLauncher extends Application<AppConfig> {
 
@@ -24,7 +25,8 @@ public class AppLauncher extends Application<AppConfig> {
     public void run(AppConfig appConfig, Environment environment) throws Exception {
         Jdbi jdbi = JdbiProvider.provideJdbi(environment, appConfig.getDataSourceFactory());
         BatteryStateRepository repo = new BatteryStateRepository(jdbi);
-        BatteryStateResource batteryStateResource = new BatteryStateResource(repo);
+        MetadataRepository metadataRepository = new MetadataRepository(jdbi);
+        BatteryStateResource batteryStateResource = new BatteryStateResource(repo, metadataRepository);
         environment.jersey().register(batteryStateResource);
     }
 

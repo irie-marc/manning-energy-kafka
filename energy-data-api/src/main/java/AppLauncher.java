@@ -1,4 +1,5 @@
 import energy.avro.BatteryState;
+import energy.avro.DeviceMessageMetadata;
 import energy.avro.RawDeviceEvent;
 import io.confluent.kafka.serializers.KafkaAvroSerializer;
 import io.dropwizard.core.Application;
@@ -36,14 +37,16 @@ public class AppLauncher extends Application<DeviceEventApplicationConfig> {
 
 
         KafkaProducer<String, RawDeviceEvent> producer = new KafkaProducer<>(settings);
+        KafkaProducer<String, DeviceMessageMetadata> metadataKafkaProducer = new KafkaProducer<>(settings);
         Runtime.getRuntime().addShutdownHook(new Thread("shutdown-hook") {
             @Override
             public void run() {
                 producer.close();
+                metadataKafkaProducer.close();
             }
         });
 
-        final BatteryResource resource = new BatteryResource(producer);
+        final BatteryResource resource = new BatteryResource(producer, metadataKafkaProducer);
         environment.jersey().register(resource);
     }
 }
